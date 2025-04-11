@@ -1,43 +1,70 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roteiriza.ai</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 2rem; background: #f0f0f0; }
-    h1 { color: #333; }
-    #roteiro { white-space: pre-line; margin-top: 2rem; background: #fff; padding: 1rem; border-radius: 8px; }
-    button { padding: 0.5rem 1rem; border: none; border-radius: 6px; background-color: #007bff; color: white; cursor: pointer; }
-    input { padding: 0.5rem; width: 300px; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    input, button {
+      padding: 10px 16px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    input {
+      width: 300px;
+    }
+
+    button {
+      background: #5a4fff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #4838e6;
+    }
+
+    pre {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      width: 90%;
+      max-width: 700px;
+      white-space: pre-wrap;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <h1>🎬 Gerador de Roteiros para TikTok</h1>
-  <input type="text" id="tema" placeholder="Digite um tema..." />
+  <h1>📝 Roteiriza.ai</h1>
+  <p>Gere roteiros incríveis para TikTok com base em temas de produtos da Shopee!</p>
+
+  <input type="text" id="tema" placeholder="Ex: organizador de maquiagem, ring light..." />
   <button onclick="gerarRoteiro()">Gerar Roteiro</button>
 
-  <div id="roteiro"></div>
+  <pre id="roteiro">Digite um tema e clique em "Gerar Roteiro" 🚀</pre>
 
-  <script>
-    async function gerarRoteiro() {
-      const tema = document.getElementById('tema').value;
-      const roteiroDiv = document.getElementById('roteiro');
-      roteiroDiv.innerText = '⏳ Gerando...';
-
-      try {
-        const response = await fetch('https://1fa2b07e-eab5-4351-8f0a-fedb969e99e3-00-334gsak9x3smt.picard.replit.dev/gerar-roteiro', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tema }),
-        });
-
-        const data = await response.json();
-        roteiroDiv.innerText = data.roteiro || '❌ Erro ao gerar roteiro.';
-      } catch (err) {
-        roteiroDiv.innerText = '❌ Erro de conexão com o servidor.';
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
