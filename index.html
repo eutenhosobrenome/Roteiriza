@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Roteiriza - Gerador de Roteiros TikTok</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    .tema-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    button:hover {
+      background-color: #0d6efd;
+    }
+
+    #output {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      white-space: pre-wrap;
+      margin-top: 1.5rem;
+    }
+
+    #loading {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Roteiriza 🎬</h1>
+  <p>Escolha um tema para gerar um roteiro:</p>
+
+  <div class="tema-buttons">
+    <button onclick="gerarRoteiro('Produtos da Shopee')">Produtos da Shopee</button>
+    <button onclick="gerarRoteiro('Beleza e Skincare')">Beleza e Skincare</button>
+    <button onclick="gerarRoteiro('Truques de Vida')">Truques de Vida</button>
+    <button onclick="gerarRoteiro('Decoração Barata')">Decoração Barata</button>
+  </div>
+
+  <div id="loading"></div>
+  <div id="output">O roteiro gerado aparecerá aqui...</div>
+
+  <script>
+    async function gerarRoteiro(tema) {
+      const output = document.getElementById('output');
+      const loading = document.getElementById('loading');
+
+      output.innerText = '';
+      loading.innerText = 'Gerando roteiro...';
+
+      try {
+        const resposta = await fetch('https://7d622050-c4bc-4d41-a5d1-f3fa095cdabb-00-jum004
