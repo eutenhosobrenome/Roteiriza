@@ -1,83 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Roteiriza - Gerador de Roteiros TikTok</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roteiriza.ai</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f2f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    h1 {
-      margin-bottom: 1rem;
-    }
-
-    .tema-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    button {
-      background-color: #1e90ff;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-
-    button:hover {
-      background-color: #0d6efd;
-    }
-
-    #output {
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 600px;
-      width: 100%;
-      white-space: pre-wrap;
-      margin-top: 1.5rem;
-    }
-
-    #loading {
-      margin-top: 1rem;
-      font-style: italic;
-      color: #666;
-    }
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f0f0f0; }
+    h1 { color: #333; }
+    #roteiro { white-space: pre-line; margin-top: 2rem; background: #fff; padding: 1rem; border-radius: 8px; }
+    button { padding: 0.5rem 1rem; border: none; border-radius: 6px; background-color: #007bff; color: white; cursor: pointer; }
+    input { padding: 0.5rem; width: 300px; }
   </style>
 </head>
 <body>
+  <h1>🎬 Gerador de Roteiros para TikTok</h1>
+  <input type="text" id="tema" placeholder="Digite um tema..." />
+  <button onclick="gerarRoteiro()">Gerar Roteiro</button>
 
-  <h1>Roteiriza 🎬</h1>
-  <p>Escolha um tema para gerar um roteiro:</p>
-
-  <div class="tema-buttons">
-    <button onclick="gerarRoteiro('Produtos da Shopee')">Produtos da Shopee</button>
-    <button onclick="gerarRoteiro('Beleza e Skincare')">Beleza e Skincare</button>
-    <button onclick="gerarRoteiro('Truques de Vida')">Truques de Vida</button>
-    <button onclick="gerarRoteiro('Decoração Barata')">Decoração Barata</button>
-  </div>
-
-  <div id="loading"></div>
-  <div id="output">O roteiro gerado aparecerá aqui...</div>
+  <div id="roteiro"></div>
 
   <script>
-    async function gerarRoteiro(tema) {
-      const output = document.getElementById('output');
-      const loading = document.getElementById('loading');
-
-      output.innerText = '';
-      loading.innerText = 'Gerando roteiro...';
+    async function gerarRoteiro() {
+      const tema = document.getElementById('tema').value;
+      const roteiroDiv = document.getElementById('roteiro');
+      roteiroDiv.innerText = '⏳ Gerando...';
 
       try {
-        const resposta = await fetch('https://7d622050-c4bc-4d41-a5d1-f3fa095cdabb-00-jum004
+        const response = await fetch('https://1fa2b07e-eab5-4351-8f0a-fedb969e99e3-00-334gsak9x3smt.picard.replit.dev/gerar-roteiro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tema }),
+        });
+
+        const data = await response.json();
+        roteiroDiv.innerText = data.roteiro || '❌ Erro ao gerar roteiro.';
+      } catch (err) {
+        roteiroDiv.innerText = '❌ Erro de conexão com o servidor.';
+      }
+    }
+  </script>
+</body>
+</html>
